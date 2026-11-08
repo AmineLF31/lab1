@@ -10,6 +10,10 @@ jobs:
 
     steps:
       - name: github context
-        run : echo "github context {{toJSON(github)}}"
+        env:
+            GITHUB_CONTEXT : ${{toJSON(github)}}
+        run : echo "github context $GITHUB_CONTEXT"
       - name: github event context
-        run : echo "github context {{toJSON(github.event)}}"
+        env:
+            EVENT_CONTEXT : ${{toJSON(github.event)}}
+        run : echo "github context $EVENT_CONTEXT"
