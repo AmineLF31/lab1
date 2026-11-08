@@ -1,0 +1,51 @@
+name: CI en plusieurs Jobs 
+
+on:
+  push:
+    
+jobs:
+  Lint:
+    name: Lint
+    runs-on: ubuntu-latest    
+
+    steps:
+      - name: Récupérer le code
+        uses: actions/checkout@v4
+
+      - name: Installer les dépendances
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+  Test:
+    name: Test
+    runs-on: ubuntu-latest    
+
+    steps:
+      - name: Récupérer le code
+        uses: actions/checkout@v4
+
+      - name: Installer les dépendances
+        run: npm ci
+
+      - name: Test
+        run: npm run test
+  Deploy:
+    name: Deploy
+    runs-on: ubuntu-latest    
+
+    steps:
+      - name: Récupérer le code
+        uses: actions/checkout@v4
+
+      - name: Installer les dépendances
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+        
+      - name: Deploy
+        run : echo "Deploying the application................................"
+
+      
+      
