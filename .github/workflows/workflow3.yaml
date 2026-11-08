@@ -9,5 +9,7 @@ jobs:
     runs-on: ubuntu-latest    
 
     steps:
-      - name: Issue Step
-        run : echo "Handling the issue................................"
+      - name: github context
+        run : echo "github context {{toJSON(github)}}""
+      - name: github event context
+        run : echo "github context {{toJSON(github.event)}}""
