@@ -1,0 +1,13 @@
+name: CI  
+
+on:
+  issues:
+    
+jobs:
+  issue_job:
+    name: Issue Job
+    runs-on: ubuntu-latest    
+
+    steps:
+      - name: Issue Step
+        run : echo "Handling the issue................................"
