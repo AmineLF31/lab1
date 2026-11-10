@@ -13,12 +13,14 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Mettre en cache les dépendances
+        id: cache-node-modules
         uses: actions/cache@v4
         with:
           path: ~/.npm
           key: deps-node-modules-${{ hashFiles('**/package-lock.json') }}
 
       - name: Installer les dépendances
+        if: steps.cache-node-modules.outputs.cache-hit != 'true'
         run: npm ci
 
       - name: Lint
@@ -47,6 +49,10 @@ jobs:
       - name: Build
         run: npm run build
 
+      - name : Find generated js file
+        id: find-js-file
+        run: echo "script-file = " && find dist -name "*.js" >> $GITHUB_OUTPUT
+
       - name: Upload Build Artifacts
         uses: actions/upload-artifact@v7
         with:
@@ -67,7 +73,7 @@ jobs:
         run: ls -R
 
       - name: Deploy
-        run : echo "Deploying the application................................"
+        run: 'echo "Deploying ... fichier principal : ${{needs.Build.outputs.find-js-file.script-file}}"'
 
       
       
